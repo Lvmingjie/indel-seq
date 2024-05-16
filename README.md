@@ -1,17 +1,17 @@
 # indel-seq
 Sequencing based indel marker selection and identification]
----
-524_InDels Screening High Quality InDels
 
+524_InDels Screening High Quality InDels
+---
 2_clean
 
 3_bwa_bam
 
 4_gatk
----
+
 
 MM_InDels
-
+---
 1_sh
 
 Tronje Shortcuts 524 grape resequenced InDels and SNPs, and the grape genome
@@ -33,9 +33,9 @@ Obtaining eligible primers for InDels labelling
 6_sh 7_sh
 
 Plotting genotype occupancy of 524 grapes corresponding to 80 InDels primers
----
-Seq
 
+Seq
+---
 Sequencing data analysis
 
 2_merge 
