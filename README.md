@@ -1,5 +1,5 @@
 # indel-seq
-Sequencing based indel marker selection and identification
+Sequencing based indel marker selection and identification\n
 2_clean
 3_bwa_bam
 4_gatk
