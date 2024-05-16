@@ -1,0 +1,13 @@
+rm InDelre_out_2023Dec141403_top.fa
+rm InDelre_out_2023Dec141403.xls
+rm slurm_jobs_count_InDelre_1
+
+##InDelre数据按每套引物, 分开跑
+
+perl count_HiTOM_seqs_8row_12col.pl InDelre_merged.fq.gz primer_table_all InDel2 barcode_row barcode_col InDelre_2_out
+perl count_HiTOM_seqs_8row_12col.pl InDelre_merged.fq.gz primer_table_all InDel3 barcode_row barcode_col InDelre_3_out
+perl count_HiTOM_seqs_8row_12col.pl InDelre_merged.fq.gz primer_table_all InDel4 barcode_row barcode_col InDelre_4_out
+perl count_HiTOM_seqs_8row_12col.pl InDelre_merged.fq.gz primer_table_all InDel5 barcode_row barcode_col InDelre_5_out
+perl count_HiTOM_seqs_8row_12col.pl InDelre_merged.fq.gz primer_table_all InDel6 barcode_row barcode_col InDelre_6_out
+perl count_HiTOM_seqs_8row_12col.pl InDelre_merged.fq.gz primer_table_all InDel12 barcode_row barcode_col InDelre_12_out
+

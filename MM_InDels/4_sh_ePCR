@@ -1,0 +1,17 @@
+##e_PCR分析并保留唯一扩增产物结果
+
+cat indels_out_2023Apr181120_context_primer3out.xls |awk '{print $1"\t"$3"\t"$5"\t"$7}' > indels_out_2023Apr181120_context_primer3out_reformat_sts
+
+e-PCR \
+indels_out_2023Apr181120_context_primer3out_reformat_sts \
+D=100-500 N=2 G=2 T=3 \
+/aglab200T/aglab/cr/3_genomes/Grape/12X/GCF_000003745.3_12X/grape_12X_genome_ChrID.fa \
+> indels_out_2023Apr181120_context_primer3out_reformat_sts_ePCR_out
+
+cat indels_out_2023Apr181120_context_primer3out_reformat_sts_ePCR_out |cut -f2 |sort |uniq -u > indels_out_2023Apr181120_context_primer3out_reformat_sts_ePCR_out_uniqlist
+
+
+perl get_line_by_list_2020May03.pl \
+indels_out_2023Apr181120_context_primer3out_reformat_sts_ePCR_out_uniqlist \
+indels_out_2023Apr181120_context_primer3out.xls \
+indels_out_2023Apr181120_context_primer3out_ePCR_verified.xls

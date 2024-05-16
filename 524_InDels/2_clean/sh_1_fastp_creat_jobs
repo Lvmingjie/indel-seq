@@ -1,0 +1,68 @@
+#!/bin/bash
+
+
+path1="/mnt/freeNAS_50T/projects02/1_Grape_Reseq/1_rawdata/downloaded_fq_PRJNA388292"
+path2="/mnt/freeNAS_50T/projects02/1_Grape_Reseq/1_rawdata/downloaded_fq_PRJNA393611"
+#path="/mnt/freeNAS_50T/projects02/1_Grape_Reseq/1_rawdata/downloaded_fq_PRJNA3"
+
+
+if [ -d "clean_reads" ]; then 
+	echo "Folder clean_reads exists!"
+	#exit
+else
+	mkdir clean_reads
+fi
+
+
+cd clean_reads
+unset count
+group=1
+
+#dat=`date +%Y%b%d%H%M`
+dat=`date +%Y%b%d`
+
+for i in `ls $path1* |grep "_1.fastq.gz$"`
+do
+	tag=${i:0:10}	##SRR5891646_1.fastq.gz
+	
+	if [ -e $tag"_clean_R1.fq.gz" ] && [ -e $tag"_clean_R2.fq.gz" ] ; then
+		echo $tag
+	else
+	
+		count=$[ $count + 1]
+		w=$[ $count % 34 ]
+		
+		echo "fastp -i ${path1}/${tag}_1.fastq.gz -o ${tag}_clean_R1.fq.gz -I ${path1}/${tag}_2.fastq.gz -O ${tag}_clean_R2.fq.gz -j $tag.fastp.json -h $tag.fastp.html -w 8 2> $tag.fastp.log" >> "jobs_fastp_PRJNA388292_"$dat"_"$group
+	
+		if [ $w -eq 0 ]; then
+			group=$[ $group + 1]
+		fi
+
+	fi
+
+done
+
+
+for i in `ls $path2* |grep "_1.fastq.gz$"`
+do
+	tag=${i:0:10}	##SRR5891646_1.fastq.gz
+	
+	if [ -e $tag"_clean_R1.fq.gz" ] && [ -e $tag"_clean_R2.fq.gz" ] ; then
+		echo $tag
+	else
+	
+		count=$[ $count + 1]
+		w=$[ $count % 34 ]
+		
+		echo "fastp -i ${path2}/${tag}_1.fastq.gz -o ${tag}_clean_R1.fq.gz -I ${path2}/${tag}_2.fastq.gz -O ${tag}_clean_R2.fq.gz -j $tag.fastp.json -h $tag.fastp.html -w 8 2> $tag.fastp.log" >> "jobs_fastp_PRJNA393611_"$dat"_"$group
+	
+		if [ $w -eq 0 ]; then
+			group=$[ $group + 1]
+		fi
+
+	fi
+
+done
+
+
+cd ..

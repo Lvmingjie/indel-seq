@@ -1,0 +1,1 @@
+ls -dF  /aglab200T/aglab/cr/projects04/a8_InDel_Hitom_JGY/1_rawdata/X101SC23090285-Z01-J001/00.CleanData/*/* |grep clean.fq.gz |xargs -n 1 ln -s

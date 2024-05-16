@@ -1,0 +1,48 @@
+#!/bin/bash
+
+
+#dat=`date +%Y%b%d%H%M`
+dat=`date +%Y%b%d`
+
+current_path=`pwd`
+
+unset count
+group=1
+
+for i in `ls ./* |grep "InDel" |grep "_merged.fq.gz" `
+do
+	#echo $i
+	i=${i##*/}
+	tag=${i%_merged.fq.gz}
+	#tag=${tag/-/_}
+	echo $tag
+	
+	k=${tag%%_*}
+	echo $k
+	
+	#if [ -e $tag"_merged.fq.gz" ]; then
+	#	echo $tag" has been already merged."
+	#else
+		#count=$[ $count + 1]
+		#w=$[ $count % 25 ]
+		#w=$[ $count % 1 ]
+		
+		#if [ $count -eq 1 ]; then
+			echo "#!/bin/bash" 										>> "slurm_jobs_count_"$tag"_"$group
+			echo "" 												>> "slurm_jobs_count_"$tag"_"$group
+			echo "#SBATCH -J "$tag									>> "slurm_jobs_count_"$tag"_"$group
+			echo "#SBATCH -n 2" 									>> "slurm_jobs_count_"$tag"_"$group
+			echo "#SBATCH --mem-per-cpu=5G" 						>> "slurm_jobs_count_"$tag"_"$group
+			echo "#SBATCH -D "$current_path							>> "slurm_jobs_count_"$tag"_"$group
+			echo ""													>> "slurm_jobs_count_"$tag"_"$group
+		#fi
+			echo "perl count_HiTOM_seqs_8row_12col.pl "$tag"_merged.fq.gz primer_table_all "$k" barcode_row barcode_col "$tag"_out" >> "slurm_jobs_count_"$tag"_"$group
+
+		#if [ $w -eq 0 ]; then
+		#	group=$[ $group + 1]
+		#fi
+	#fi
+done
+
+
+

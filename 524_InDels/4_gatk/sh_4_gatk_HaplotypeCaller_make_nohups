@@ -1,0 +1,28 @@
+#!/bin/bash
+
+
+#dat=`date +%Y%b%d%H%M`
+dat=`date +%Y%b%d`
+
+out="sh_5_gatk_HaplotypeCaller_run_ALL"
+
+for i in `ls -dF ./* |grep "/$"`
+do
+	echo $i
+	chr=${i%/}
+	chr=${chr##*/}
+	
+	cd $i
+	
+	echo "cd $chr" >> ../$out
+	for j in `ls |grep "^jobs_" | grep $dat`
+	do
+		#echo "nohup sh $j > ${j}.log 2>&1 &" >> ../$out
+		echo "nohup sh $j &" >> ../$out
+	done 
+	echo "cd .." >> ../$out
+	
+	cd ..
+	
+done
+

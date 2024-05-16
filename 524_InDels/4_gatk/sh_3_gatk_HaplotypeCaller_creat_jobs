@@ -1,0 +1,46 @@
+#!/bin/bash
+
+#Grape genome
+genome_file="/mnt/freeNAS_50T/3_genomes/Grape/12X/GCF_000003745.3_12X/grape_12X_genome_ChrID.fa"
+
+#dat=`date +%Y%b%d%H%M`
+dat=`date +%Y%b%d`
+
+##HaplotypeCaller
+for i in `ls -dF ./* |grep "/$"`
+do
+	echo $i
+	chr=${i%/}
+	chr=${chr##*/}
+	
+	cd $i
+	
+	unset count
+	group=1
+	
+	for j in `ls |grep ".bam$"`
+	do
+		tag=${j%.bam}
+		
+		#file1=$tag"_"$chr".gvcf.gz"
+		#file2=$tag"_"$chr".gvcf.gz.tbi"
+	
+		if [ -e $tag".gvcf.gz" ] && [ -e $tag".gvcf.gz.tbi" ] ; then
+			echo $tag" already done."
+		else
+		
+			count=$[ $count + 1]
+			w=$[ $count % 253 ]
+		
+			#echo "gatk --java-options \"-Xms5G -Xmx5G\" HaplotypeCaller -R $genome_file -ERC GVCF -I $j -O $tag.gvcf.gz 2> $tag.HaplotypeCaller.log" >> "jobs_gatk_HaplotypeCaller_"$dat"_"$chr"_"$group
+			echo "gatk --java-options \"-Xms2G -Xmx2G\" HaplotypeCaller -R $genome_file -ERC GVCF -I $j -O $tag.gvcf.gz 2> $tag.HaplotypeCaller.log" >> "jobs_gatk_HaplotypeCaller_"$dat"_"$chr"_"$group
+		
+			if [ $w -eq 0 ]; then
+				group=$[ $group + 1]
+			fi
+		fi
+	done
+	
+	cd ..
+
+done

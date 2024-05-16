@@ -1,0 +1,32 @@
+setwd("X:\\1_Work_current\\201906_Grape_Reseq\\P4_a2_Grape_InDels")
+
+library(ggplot2)
+
+t1 <- read.table("t1_stack_cols_Rtable_2023Apr181213.xls")
+head(t1)
+           V1  V2    V3
+1 Chr1_940779 ._.  1.52
+2 Chr1_940779 0_0 28.62
+3 Chr1_940779 0_1 32.82
+4 Chr1_940779 0_2  2.67
+5 Chr1_940779 0_3  0.95
+6 Chr1_940779 0_4  0.19
+
+
+ggplot(t1, aes(x=V1, y=V3, fill=V2)) + geom_col() + 
+	theme_bw() + theme(panel.grid=element_blank()) + 
+	xlab("Sites") + ylab("Percent") +
+	theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust = 1))
+		
+ggsave("t1_stack_cols_Rtable_2023Apr181213_stackcols.pdf") 
+
+
+
+
+
+
+
+
+
+
+

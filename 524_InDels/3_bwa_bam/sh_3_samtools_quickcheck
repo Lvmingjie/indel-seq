@@ -1,0 +1,1 @@
+samtools quickcheck -v ./1_bam/*.bam > bad_bams.fofn && echo 'all ok' || echo 'some files failed check, see bad_bams.fofn'

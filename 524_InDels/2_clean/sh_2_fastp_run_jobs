@@ -1,0 +1,12 @@
+#!/bin/bash
+
+path="./clean_reads"
+
+cd $path
+
+for i in `ls |grep "jobs_fastp"`
+do
+	nohup sh $i > ${i}.log 2&>1 &
+done
+
+cd ..

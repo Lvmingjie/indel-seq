@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#Grape
+genome_file="/mnt/freeNAS_50T/3_genomes/Grape/12X/GCF_000003745.3_12X/grape_12X_genome_ChrID.fa"
+genome_file_path="/mnt/freeNAS_50T/3_genomes/Grape/12X/GCF_000003745.3_12X"
+
+
+#dict genome
+if [ -f $genome_file_path"/grape_12X_genome_ChrID.dict" ] ; then
+	echo "The genome was dictionaried."
+else
+	gatk CreateSequenceDictionary -R $genome_file -O $genome_file_path"/grape_12X_genome_ChrID.dict"
+fi
+
+
+#samtools faidx
+#samtools faidx $genome_file
+
+#samtools index
+for i in `ls -dF ./* |grep "/$"`
+do
+	echo $i
+	for j in `ls $i* | grep "bam$"`
+	do
+		samtools index $j
+	done
+done
+
+

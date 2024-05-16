@@ -1,0 +1,52 @@
+#使用4_slurm_job_count结果文件
+all_merged_23samples_out_2023Dec141240.xls
+
+#fq文件列表
+ls |grep InDel |grep R_merged.fq.gz > merged_fq_file_list1
+
+
+#使用上一步产出的genotype结果文件作为输入;
+#primer_table文件与上一步相同;
+#每一个sample中的reads总数 >= 1000, 并且每种genotype >= 100, 既认定该基因型存在于该样本中;
+
+##20231222修改参数
+1. 每个孔的reads总数 >= 1000;
+2. 每个孔的Top1 百分比 >= 30%;
+3. 每个孔的Top2/Top1 百分比 >= 30%;
+
+
+"count_HiTOM_seqs_8row_12col_genotype_table.pl"
+
+perl count_HiTOM_seqs_8row_12col_genotype_table.pl \
+merged_fq_file_list1 \
+primer_table_all \
+all_merged_23samples_out_2023Dec141240.xls \
+barcode_row \
+barcode_col \
+genotype_out
+
+
+产出结果文件:
+"genotype_out_xxxxxxxxxxx.xls"
+
+
+
+##针对补测数据, 改动程序, 再跑一套结果
+"count_HiTOM_seqs_8row_12col_genotype_table_for_buce.pl"
+
+perl count_HiTOM_seqs_8row_12col_genotype_table_for_buce.pl \
+InDelre_merged.fq.gz \
+primer_table_all \
+all_merged_23samples_out_2023Dec141240.xls \
+barcode_row \
+barcode_col \
+genotype_out_buce
+
+
+产出结果文件:
+"genotype_out_buce_xxxxxxxxxxx.xls"
+
+
+
+
+

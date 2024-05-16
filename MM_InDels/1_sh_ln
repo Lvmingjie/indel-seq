@@ -1,0 +1,5 @@
+ln -s /aglab200T/aglab/cr/projects02/1_Grape_Reseq/a1_final_SNPs_524/final_merged_InDels_grape524_2021Aug08.vcf.gz .
+ln -s /aglab200T/aglab/cr/projects02/1_Grape_Reseq/a1_final_SNPs_524/final_merged_SNPs_grape524_2021Aug08.vcf.gz .
+
+ln -s /aglab200T/aglab/cr/3_genomes/Grape/12X/GCF_000003745.3_12X/grape_12X_genome_ChrID.fa .
+

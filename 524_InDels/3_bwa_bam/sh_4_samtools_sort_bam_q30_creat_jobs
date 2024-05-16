@@ -1,0 +1,75 @@
+#!/bin/bash
+
+
+if [ -d "2_bam_stats" ]; then 
+	echo "Folder 2_bam_stats exists!"
+	exit
+else
+	mkdir 2_bam_stats
+fi
+
+if [ -d "3_bam_sort" ]; then 
+	echo "Folder 3_bam_sort exists!"
+	exit
+else
+	mkdir 3_bam_sort
+fi
+
+if [ -d "4_bam_q30" ]; then 
+	echo "Folder 4_bam_q30 exists!"
+	exit
+else
+	mkdir 4_bam_q30
+fi
+
+if [ -d "5_bam_MarkDup" ]; then 
+	echo "Folder 5_bam_MarkDup exists!"
+	exit
+else
+	mkdir 5_bam_MarkDup
+fi
+
+
+unset count
+group=1
+
+#dat=`date +%Y%b%d%H%M`
+dat=`date +%Y%b%d`
+
+for i in `ls ./1_bam/ |grep ".bam$"`
+do
+	#tag=${i:0:7}
+	tag=${i:0:10}
+	
+	if [ -f ./1_bam/$tag".bam" ] ; then
+		
+		count=$[ $count + 1]
+		w=$[ $count % 34 ]
+	
+		##samtools stats
+		echo "samtools stats -@ 8 ./1_bam/$tag.bam > ./2_bam_stats/$tag.bam.stats" >> "jobs_sort_bam_q30_MarkDup_"$dat"_"$group
+	
+		##sort
+		echo "samtools sort -@ 8 ./1_bam/$tag.bam -o ./3_bam_sort/$tag.sort.bam" >> "jobs_sort_bam_q30_MarkDup_"$dat"_"$group
+		
+		##q30 filter
+		echo "samtools view -@ 8 -q 30 -bS ./3_bam_sort/$tag.sort.bam > ./4_bam_q30/$tag.sort.q30.bam" >> "jobs_sort_bam_q30_MarkDup_"$dat"_"$group
+		
+		##gatk4 已整合picard功能
+		echo "gatk --java-options \"-Xms20G -Xmx20G\" MarkDuplicates -I ./4_bam_q30/$tag.sort.q30.bam -O ./5_bam_MarkDup/$tag.sort.q30.markdup.bam -M ./5_bam_MarkDup/$tag.sort.q30.markdup.metrics -AS true" >> "jobs_sort_bam_q30_MarkDup_"$dat"_"$group
+		
+		## gatk ValidateSamFile
+		echo "gatk ValidateSamFile -I ./5_bam_MarkDup/$tag.sort.q30.markdup.bam -O ./5_bam_MarkDup/$tag.sort.q30.markdup.bam.check" >> "jobs_sort_bam_q30_MarkDup_"$dat"_"$group
+		
+		
+		if [ $w -eq 0 ]; then
+			group=$[ $group + 1]
+		fi
+	
+	else
+		echo $tag
+	fi
+	
+done
+
+

@@ -1,0 +1,10 @@
+cp ../3_count/primer_table_jgy20230928 .
+cp /public200T/aglab/jiaguiying/3_Hi-Tom/6_count_20231205/primer_table_jgy20231214 .
+cat primer_table_jgy20230928 primer_table_jgy20231214 > primer_table_all
+
+cp /aglab200T/aglab/cr/projects04/a8_InDel_Hitom_JGY/3_count/count_HiTOM_seqs.pl .
+
+cp /aglab200T/aglab/cr/projects04/a8_InDel_Hitom_JGY/3_count/count_HiTOM_seqs_8row_12col.pl .
+cp /aglab200T/aglab/cr/projects04/a8_InDel_Hitom_JGY//3_count/barcode_* .
+
+
