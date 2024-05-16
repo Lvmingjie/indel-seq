@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#SBATCH -J filter_InDel
+#SBATCH -n 2
+
+perl filter_high_polymorphism_InDels.pl final_merged_InDels_grape524_2021Aug08.vcf.gz grape_12X_genome_ChrID.fa indels_out
+

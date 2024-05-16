@@ -1,0 +1,10 @@
+perl get_line_by_list3.pl \
+indels_out_2023Apr181120.vcf \
+indels_out_2023Apr181120_context_primer3out_ePCR_verified.xls \
+indels_out_2023Apr181120_ePCR_verified.vcf
+
+perl get_line_by_list3.pl \
+indels_out_2023Apr181120_table.xls \
+indels_out_2023Apr181120_context_primer3out_ePCR_verified.xls \
+indels_out_2023Apr181120_table_ePCR_verified.xls
+

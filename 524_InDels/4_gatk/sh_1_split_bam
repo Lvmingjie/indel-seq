@@ -1,0 +1,44 @@
+#!/bin/bash
+
+##此步骤不能多线程, 产生的中间文件名 相同
+
+
+#Grape genome
+genome_file="/mnt/freeNAS_50T/3_genomes/Grape/12X/GCF_000003745.3_12X/grape_12X_genome_ChrID.fa"
+
+
+for i in `cat $genome_file |grep "^>" |awk '{print $1}'`
+do
+	chr=${i#>}
+	echo $chr
+	
+	if [ -d "$chr" ]; then 
+		echo "Folder $chr exists! Doing nothing!"
+		exit
+	else
+		mkdir $chr
+	fi
+done
+
+#path="/mnt/freeNAS_50T/projects01/1_Cauliflower_Reseq/3_re_seq_400/3_bwa_bam/5_bam_MarkDup/"
+#path="/mnt/freeNAS_50T/projects01/1_Cauliflower_Reseq/8_reseq425/2_bwa_bam/5_bam_MarkDup/"
+path="/mnt/freeNAS_50T/projects02/1_Grape_Reseq/3_bwa_bam/5_bam_MarkDup"
+
+
+for i in `ls -dF $path/* |grep ".sort.q30.markdup.bam$"`
+do
+	BamDeal modify bamSplit -i $i
+	
+	i=${i##*/}
+	tag=${i:0:10}
+	echo $tag
+	
+	for i in `cat $genome_file |grep "^>" |awk '{print $1}'`
+	do
+		chr=${i#>}
+		#echo $chr
+		mv $chr.bam ./$chr/${tag}_$chr.bam
+	done
+	rm UnMap.bam
+
+done

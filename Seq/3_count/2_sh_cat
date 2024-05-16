@@ -1,0 +1,1 @@
+cat ./*_merged.fq.gz > all_merged_23samples.fq.gz

@@ -1,0 +1,53 @@
+#!/bin/bash
+
+#Grepe_ReSeq
+
+
+if [ -d "1_bam" ]; then 
+	echo "Folder 1_bam exists! Doing nothing!"
+	exit
+else
+	mkdir 1_bam
+fi
+
+cd 1_bam
+
+#Grape genome
+genome="/mnt/freeNAS_50T/3_genomes/Grape/12X/GCF_000003745.3_12X/grape_12X_genome_ChrID.fa"
+
+#预先index基因组
+#bwa index grape_12X_genome_ChrID.fa
+
+
+path="/mnt/freeNAS_50T/projects02/1_Grape_Reseq/2_clean/clean_reads"
+
+unset count
+group=1
+
+#dat=`date +%Y%b%d%H%M`
+dat=`date +%Y%b%d`
+
+for i in `ls $path |grep "_clean_R1.fq.gz"`
+do
+	#tag=${i##*/}
+	#tag=${tag:0:7}
+	
+	tag=${i:0:10}
+	
+	if [ -e $tag".bam" ] ; then
+		echo $tag
+	else
+	
+		count=$[ $count + 1]
+		w=$[ $count % 34 ]
+		
+		echo "bwa mem -t 8 -M -R \"@RG\tID:$tag\tLB:$tag\tPL:Illumina\tPU:PE\tSM:$tag\" $genome $path/$tag"_clean_R1.fq.gz" $path/$tag"_clean_R2.fq.gz" |samtools view -@ 8 -bS > $tag.bam" >> "jobs_bwa_"$dat"_"$group
+	
+		if [ $w -eq 0 ]; then
+			group=$[ $group + 1]
+		fi
+
+	fi
+done
+cd ..
+

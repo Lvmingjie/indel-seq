@@ -1,0 +1,43 @@
+#!/bin/bash
+
+
+#dat=`date +%Y%b%d%H%M`
+dat=`date +%Y%b%d`
+
+current_path=`pwd`
+
+unset count
+group=1
+
+for i in `ls ./* |grep "_1.clean.fq.gz"`
+do
+	echo $i
+	i=${i##*/}
+	i=${i%_1.clean.fq.gz}
+	tag=${i/-/_}
+	echo $tag
+	
+	if [ -e $tag"_merged.fq.gz" ]; then
+		echo $tag" has been already merged."
+	else
+		#count=$[ $count + 1]
+		#w=$[ $count % 25 ]
+		#w=$[ $count % 1 ]
+		
+		#if [ $count -eq 1 ]; then
+			echo "#!/bin/bash" 										>> "slurm_jobs_fp_merge_"$tag"_"$group
+			echo "" 												>> "slurm_jobs_fp_merge_"$tag"_"$group
+			echo "#SBATCH -J fp_"$tag								>> "slurm_jobs_fp_merge_"$tag"_"$group
+			echo "#SBATCH -n 8" 									>> "slurm_jobs_fp_merge_"$tag"_"$group
+			echo "#SBATCH --mem-per-cpu=5G" 						>> "slurm_jobs_fp_merge_"$tag"_"$group
+			echo "#SBATCH -D "$current_path							>> "slurm_jobs_fp_merge_"$tag"_"$group
+			echo ""													>> "slurm_jobs_fp_merge_"$tag"_"$group
+		#fi
+			echo "fastp -i "$i"_1.clean.fq.gz -I "$i"_2.clean.fq.gz --merge --merged_out "$tag"_merged.fq.gz --length_required 50 -c -j "$tag"_merged.fastp.json -h "$tag"_merged.fastp.html -w 8 2> "$tag"_merged.fastp.log" >> "slurm_jobs_fp_merge_"$tag"_"$group
+
+		#if [ $w -eq 0 ]; then
+		#	group=$[ $group + 1]
+		#fi
+	fi
+done
+

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#SBATCH -J primer3
+#SBATCH -n 2
+
+perl run_primer3_forInDels.pl indels_out_2023Apr181120_context.fa indels_out_2023Apr181120_context_primer3out.xls

@@ -1,0 +1,5 @@
+#需要使用InDelre数据替换过的新表来统计
+ls /public200T/aglab/jiaguiying/3_Hi-Tom/6_count_20231205/InDel_mod/* |grep out_mod.xls > input_list1
+ls -dF /aglab200T/aglab/cr/projects04/a8_InDel_Hitom_JGY/5_count/* |grep R_out_2023Dec141403.xls |grep -v InDel12_ |grep -v InDel2_ |grep -v InDel3_ |grep -v InDel4_ |grep -v InDel5_ |grep -v InDel6 >> input_list1
+
+perl count_HiTOM_fragments.pl input_list1 fragments_out

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#cd 1_bam
+
+dat=`date +%Y%b%d`
+
+for i in `ls |grep "jobs" |grep $dat`
+do
+	#quick_qsub {-q queue1 -l mem=60G,nodes=1:ppn=16} sh $i
+	nohup sh $i &
+done
+
+#cd ..
+
+##T630
+#nohup sh jobs_2020Jul22_1_sh_sort_bam_q30_MarkDup &
+#nohup sh jobs_2020Jul22_2_sh_sort_bam_q30_MarkDup &
+#nohup sh jobs_2020Jul22_3_sh_sort_bam_q30_MarkDup &
+
+##T620
+#nohup sh jobs_2020Jul22_4_sh_sort_bam_q30_MarkDup &
+#nohup sh jobs_2020Jul22_5_sh_sort_bam_q30_MarkDup &

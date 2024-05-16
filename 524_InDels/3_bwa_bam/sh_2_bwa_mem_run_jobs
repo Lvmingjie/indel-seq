@@ -1,0 +1,14 @@
+#!/bin/bash
+
+cd 1_bam
+
+for i in `ls |grep "jobs_bwa"`
+do
+	nohup sh $i > ${i}.log 2>&1 &
+done
+
+#nohup sh jobs_bwa_2020Sep22_1 &
+#nohup sh jobs_bwa_2020Sep22_2 &
+#nohup sh jobs_bwa_2020Sep22_3 &
+
+cd ..

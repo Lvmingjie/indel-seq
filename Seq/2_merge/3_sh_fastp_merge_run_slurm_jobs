@@ -1,0 +1,1 @@
+ls |grep slurm_jobs_fp_merge |xargs -n1 sbatch

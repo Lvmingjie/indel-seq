@@ -1,0 +1,72 @@
+cd Chr1
+cd ..
+cd Chr10
+cd ..
+cd Chr11
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr11_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr11_2 &
+cd ..
+cd Chr12
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr12_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr12_2 &
+cd ..
+cd Chr13
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr13_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr13_2 &
+cd ..
+cd Chr14
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr14_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr14_2 &
+cd ..
+cd Chr15
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr15_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr15_2 &
+cd ..
+cd Chr16
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr16_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr16_2 &
+cd ..
+cd Chr17
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr17_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr17_2 &
+cd ..
+cd Chr18
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr18_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr18_2 &
+cd ..
+cd Chr19
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr19_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr19_2 &
+cd ..
+cd Chr2
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr2_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr2_2 &
+cd ..
+cd Chr3
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr3_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr3_2 &
+cd ..
+cd Chr4
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr4_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr4_2 &
+cd ..
+cd Chr5
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr5_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr5_2 &
+cd ..
+cd Chr6
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr6_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr6_2 &
+cd ..
+cd Chr7
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr7_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr7_2 &
+cd ..
+cd Chr8
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr8_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr8_2 &
+cd ..
+cd Chr9
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr9_1 &
+nohup sh jobs_gatk_HaplotypeCaller_2021Mar10_Chr9_2 &
+cd ..
