@@ -1,0 +1,34 @@
+total_gene_diversity = 0
+
+data = {}
+with open("E:\.", 'r', encoding='utf-8') as file:
+
+    for line in file:
+        entries = line.strip().split('\t')
+        sample_name = entries[0]
+        genotype_data = entries[1:]
+        data[sample_name] = genotype_data
+
+num_loci = len(data[next(iter(data))])
+
+
+for locus in range(1, num_loci + 1):
+    gene_diversity_locus = 0
+
+
+    allele_frequencies = []
+    for sample, alleles in data.items():
+        if f"{locus}" in alleles[0]:
+            
+            alleles_count = list(map(int, alleles[0].split('_')))
+            
+            allele_frequencies.extend(alleles_count)
+
+    gene_diversity_locus = 1 - sum([(count / len(allele_frequencies)) ** 2 for count in allele_frequencies])
+
+    print(f"Indel_{locus}: {gene_diversity_locus}")
+
+    total_gene_diversity += gene_diversity_locus
+
+average_gene_diversity = total_gene_diversity / num_loci
+print(f"Average Gene Diversity: {average_gene_diversity}")
